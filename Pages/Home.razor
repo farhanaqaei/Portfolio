@@ -1,0 +1,37 @@
+﻿@page "/"
+@using Portfolio2.Models;
+@using Portfolio2.Services;
+@inject PortfolioService PortfolioService;
+
+<section data-id="home" class="animated-section start-page ps--theme_default section-active">
+    <div class="section-content vcentered">
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="title-block">
+                    <h2>@person.FirstName @person.LastName</h2>
+                    <div>
+                        <div>
+                            <div>
+                                <div class="active" style="width: 100%;">
+                                    <div class="item">
+                                        <div class="sp-subtitle">@person.Profession</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@code {
+
+    private Person? person;
+
+    protected override void OnInitialized() => person = PortfolioService.GetPersonalData();
+
+}

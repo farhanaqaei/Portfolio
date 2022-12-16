@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNetCore.Mvc;
+@using Portfolio2.Models;
+@using Portfolio2.Services;
+@inherits LayoutComponentBase;
+@inject NavigationManager NavigationManager;
+@inject EndpointDataSource EndpointsDataSource
+@inject PortfolioService PortfolioService;
+@inject IWebHostEnvironment Env;
+@inject IJSRuntime JS;
+
+
+<!-- Animated Background -->
+<div class="lm-animated-bg" style="background-image: url(/assets/main_bg.png); background-position: calc(50% + -8.51471px) calc(50% + 10.6011px);"></div>
+<!-- /Animated Background -->
+<!-- Loading animation -->
+<div class="preloader" style="display: none;">
+    <div class="preloader-animation">
+        <div class="preloader-spinner">
+        </div>
+    </div>
+</div>
+<!-- /Loading animation -->
+
+<div class="page">
+    <div class="page-content">
+
+        <header id="site_header" class="header @siteHeaderClass">
+            <div class="header-content">
+                <div class="header-photo">
+                    <img src="/assets/main_photo.jpg" alt="Farhan Aqaei">
+                </div>
+                <div class="header-titles">
+                    <h2>@person.FirstName @person.LastName</h2>
+                    <h4>@person.Profession</h4>
+                </div>
+            </div>
+
+            <NavMenu />
+
+            <div class="social-links">
+                <ul>
+                    @foreach (var social in person.Socials)
+                    {
+                        <li><a href="@social.Url" target="_blank"><i class="fab @social.Icon"></i></a></li>
+                    }
+                </ul>
+            </div>
+
+            <div class="header-buttons">
+                <a onclick="@DownloadCV" target="_blank" class="btn btn-primary">Download CV</a>
+            </div>
+
+            <div class="copyrights">© @DateTime.Now.Year All rights reserved.</div>
+        </header>
+
+        <!-- Mobile Navigation -->
+        <div class="menu-toggle @menuClass" @onclick="ToggleNavMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- End Mobile Navigation -->
+        <!-- Arrows Nav -->
+        <div class="lmpixels-arrows-nav">
+            <div class="lmpixels-arrow-right" @onclick="() => ChangePageOnArrowNavs(next)">
+                <i class="lnr lnr-chevron-right"></i>
+            </div>
+            <div class="lmpixels-arrow-left" @onclick="() => ChangePageOnArrowNavs(previous)">
+                <i class="lnr lnr-chevron-left"></i>
+            </div>
+        </div>
+        <!-- End Arrows Nav -->
+
+        <div class="content-area" @onclick="CloseNavMenuOnClickOutside">
+            <div class="animated-sections">
+                @Body
+            </div>
+        </div>
+
+    </div>
+</div>

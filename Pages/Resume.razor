@@ -1,0 +1,190 @@
+﻿@page "/resume"
+@using Portfolio2.Dtos;
+@using Portfolio2.Services;
+@inject PortfolioService PortfolioService;
+
+<section data-id="resume" class="animated-section ps--theme_default ps--active-y">
+    <div class="page-title">
+        <h2>Resume</h2>
+    </div>
+
+    <div class="section-content">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-7">
+                @foreach (var eduOrExp in resume.Resume.EducationOrExperiences.GroupBy(x => x.Type).Select(x => x.Key))
+                {
+                    <div class="block-title">
+                        <h3>@eduOrExp</h3>
+                    </div>
+
+                    <div class="timeline timeline-second-style clearfix">
+                        @foreach (var item in resume.Resume.EducationOrExperiences.Where(x => x.Type == eduOrExp))
+                        {
+                            if (item.EndDate != null)
+                            {
+                                <div class="timeline-item clearfix">
+                                    @if (!item.IsStillGoingOn)
+                                    {
+                                        <div class="left-part">
+                                            <h5 class="item-period">@item.EndDate.ToString("yyyy")</h5>
+                                            <span class="item-company">@item.Institution</span>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="right-part">
+                                            <h4 class="item-title">@item.Title</h4>
+                                            <p>@item.SecondDescription</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="left-part">
+                                            <h5 class="item-period">Present</h5>
+                                            <span class="item-company">@item.Institution</span>
+                                        </div>
+                                    <div class="divider"></div>
+                                        <div class="right-part">
+                                            <h4 class="item-title">@item.Title</h4>
+                                            <p>@item.SecondDescription</p>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            <div class="timeline-item clearfix">
+                                <div class="left-part">
+                                    <h5 class="item-period">@item.StartDate.ToString("yyyy")</h5>
+                                    <span class="item-company">@item.Institution</span>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="right-part">
+                                    <h4 class="item-title">@item.Title</h4>
+                                    <p>@item.FirstDescription</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="white-space-50"></div>
+                }
+
+
+            </div>
+
+            <!-- Skills & Certificates -->
+            <div class="col-xs-12 col-sm-5">
+                <!-- Design Skills -->
+                @foreach (var type in resume.Resume.Skills.GroupBy(x => x.Type).Select(x => x.Key))
+                {
+                    <div class="block-title">
+                        <h3>@type <span>Skills</span></h3>
+                    </div>
+
+
+
+                    <div class="skills-info skills-second-style">
+                        <!-- Skill 1 -->
+                        @foreach (var skill in resume.Resume.Skills.Where(x => x.Type == type))
+                        {
+                            <div>
+                                <div class="skill clearfix">
+                                    <h4>@skill.Title</h4>
+                                    <div class="skill-value">@skill.MasteryPercentage%</div>
+                                </div>
+                                <div class="skill-container skill-1">
+                                    <div class="skill-percentage" style="width: @skill.MasteryPercentage%"></div>
+                                </div>
+                            </div>
+                        }
+                        <!-- End of Skill 1 -->
+                    </div>
+                    <!-- End of Design Skills -->
+                }
+                <div class="white-space-10"></div>
+
+                <!-- Knowledges -->
+                <div class="block-title">
+                    <h3>Knowledges</h3>
+                </div>
+
+                <ul class="knowledges">
+                    @foreach (var knowledge in resume.Resume.Knoledge)
+                    {
+                        <li>@knowledge</li>
+                    }
+                </ul>
+                <!-- End of Knowledges -->
+            </div>
+            <!-- End of Skills & Certificates -->
+        </div>
+
+        <div class="white-space-10"></div>
+
+        <!-- Certificates -->
+        @*<div class="row">
+        <div class="col-xs-12 col-sm-12">
+        <div class="block-title">
+        <h3>Certificates</h3>
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+        <!-- Certificate 1 -->
+        <div class="col-xs-12 col-sm-6">
+        <div class="certificate-item clearfix">
+        <div class="certi-logo">
+        <img src="/assets/client-1.png" alt="logo">
+        </div>
+
+        <div class="certi-content">
+        <div class="certi-title">
+        <h4>Psyhology of Intertnation Design</h4>
+        </div>
+        <div class="certi-id">
+        <span>Membership ID: XXXX</span>
+        </div>
+        <div class="certi-date">
+        <span>19 April 2018</span>
+        </div>
+        <div class="certi-company">
+        <span></span>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- End of Certificate 1 -->
+        <!-- Certificate 2 -->
+        <div class="col-xs-12 col-sm-6">
+        <div class="certificate-item clearfix">
+        <div class="certi-logo">
+        <img src="/assets/client-1.png" alt="logo">
+        </div>
+
+        <div class="certi-content">
+        <div class="certi-title">
+        <h4>Psyhology of Intertnation Design</h4>
+        </div>
+        <div class="certi-id">
+        <span>Membership ID: XXXX</span>
+        </div>
+        <div class="certi-date">
+        <span>19 April 2018</span>
+        </div>
+        <div class="certi-company">
+        <span></span>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- End of Certificate 2 -->
+
+        </div>*@
+        <!-- End of Certificates -->
+    </div>
+</section>
+
+
+@code {
+    private ResumeDTO resume;
+
+    protected override void OnInitialized() => resume = PortfolioService.GetResume();
+}

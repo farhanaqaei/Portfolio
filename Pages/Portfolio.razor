@@ -1,0 +1,47 @@
+﻿@page "/portfolio"
+@using Portfolio2.Services;
+@inject PortfolioService PortfolioService
+
+<section data-id="portfolio" class="animated-section ps--theme_default ps--active-y">
+    <div class="page-title">
+        <h2>Portfolio</h2>
+    </div>
+
+    <div class="section-content">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <!-- Portfolio Content -->
+                <div class="portfolio-content">
+
+                    <ul class="portfolio-filters">
+                        @foreach (var projectType in projectTypes)
+                        {
+                            <li class="@(ActiveLink == projectType ? "active" : "")">
+                                <a class="filter btn btn-sm btn-link" @onclick="() => FilterPortfolios(projectType)">@projectType</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <!-- Portfolio Grid -->
+                    <div class="portfolio-grid three-columns shuffle row">
+
+                        @foreach (var portfolio in filteredPortfolios)
+                        {
+                            <figure class="item shuffle-item filtered col-md-4">
+                                <div class="portfolio-item-img">
+                                    <img src="@portfolio.ImagePath" alt="@portfolio.Title" title="">
+                                    <a href="@portfolio.GitUrl" class="lightbox mfp-iframe" target="_blank" title="@portfolio.Title"></a>
+                                </div>
+                                <h4 class="name">@portfolio.Title</h4>
+                                <span class="category">@portfolio.ProjectType</span>
+                            </figure>
+                        }
+
+                    </div>
+                </div>
+                <!-- End of Portfolio Content -->
+            </div>
+        </div>
+    </div>
+</section>
