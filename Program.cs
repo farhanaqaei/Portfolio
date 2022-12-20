@@ -1,5 +1,7 @@
+using Blazored.Toast;
 using Portfolio2.Models;
-using Portfolio2.Services;
+using Portfolio2.Services.Implementations;
+using Portfolio2.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +10,10 @@ builder.Services.Configure<PortfolioDBSettings>(
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddTransient<PortfolioService>();
+builder.Services.AddTransient<IPortfolioService, PortfolioService>();
+builder.Services.AddTransient<IViewRendererService, ViewRendererService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddBlazoredToast();
 
 var app = builder.Build();
 

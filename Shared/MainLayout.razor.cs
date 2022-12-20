@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Portfolio2.Models;
-using System.Reflection;
 
 namespace Portfolio2.Shared;
 
@@ -70,6 +69,11 @@ public partial class MainLayout
         collapseNavMenu = true;
         menuClass = "";
         siteHeaderClass = "mobile-menu-hide";
+    }
+
+    private void FakeDownloadCV()
+    {
+        ToastService.ShowInfo("Sorry, No CV found!");
     }
 
     private async Task DownloadCV()

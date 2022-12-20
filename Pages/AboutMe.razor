@@ -1,7 +1,5 @@
 ﻿@page "/aboutme"
-@using Portfolio2.Models;
-@using Portfolio2.Services;
-@inject PortfolioService PortfolioService;
+@inject IPortfolioService PortfolioService;
 
 <section data-id="about-me" class="animated-section ps--theme_default ps--active-y">
     <div class="page-title">
@@ -133,12 +131,12 @@
 @code {
 
     private Person? person;
-    private int age;
+    //private int age;
 
     protected override void OnInitialized()
     {
         person = PortfolioService.GetPersonalData();
-        age = (int)((DateTime.Now - person.BirthDate).TotalDays / 365);
+        //age = (int)((DateTime.Now - person.BirthDate).TotalDays / 365);
     }
 
 }

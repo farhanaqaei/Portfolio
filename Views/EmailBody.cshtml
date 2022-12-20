@@ -1,0 +1,10 @@
+﻿@using Portfolio2.Dtos;
+@model MailDTO;
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<p>from: @Model.FullName</p>
+<p>email: @Model.Email</p>
+<p>message: @Model.Message</p>

@@ -1,7 +1,5 @@
 ﻿@page "/resume"
-@using Portfolio2.Dtos;
-@using Portfolio2.Services;
-@inject PortfolioService PortfolioService;
+@inject IPortfolioService PortfolioService;
 
 <section data-id="resume" class="animated-section ps--theme_default ps--active-y">
     <div class="page-title">
@@ -21,36 +19,33 @@
                     <div class="timeline timeline-second-style clearfix">
                         @foreach (var item in resume.Resume.EducationOrExperiences.Where(x => x.Type == eduOrExp))
                         {
-                            if (item.EndDate != null)
-                            {
                                 <div class="timeline-item clearfix">
                                     @if (!item.IsStillGoingOn)
                                     {
                                         <div class="left-part">
-                                            <h5 class="item-period">@item.EndDate.ToString("yyyy")</h5>
+                                            <h5 class="item-period">@item.StartDate.ToString("yyyy") - @item.EndDate.ToString("yyyy")</h5>
                                             <span class="item-company">@item.Institution</span>
                                         </div>
                                         <div class="divider"></div>
                                         <div class="right-part">
                                             <h4 class="item-title">@item.Title</h4>
-                                            <p>@item.SecondDescription</p>
+                                            <p>@item.Description</p>
                                         </div>
                                     }
                                     else
                                     {
                                         <div class="left-part">
-                                            <h5 class="item-period">Present</h5>
+                                            <h5 class="item-period">@item.StartDate.ToString("yyyy") - Present</h5>
                                             <span class="item-company">@item.Institution</span>
                                         </div>
                                     <div class="divider"></div>
                                         <div class="right-part">
                                             <h4 class="item-title">@item.Title</h4>
-                                            <p>@item.SecondDescription</p>
+                                            <p>@item.Description</p>
                                         </div>
                                     }
                                 </div>
-                            }
-                            <div class="timeline-item clearfix">
+                            @*<div class="timeline-item clearfix">
                                 <div class="left-part">
                                     <h5 class="item-period">@item.StartDate.ToString("yyyy")</h5>
                                     <span class="item-company">@item.Institution</span>
@@ -60,7 +55,7 @@
                                     <h4 class="item-title">@item.Title</h4>
                                     <p>@item.FirstDescription</p>
                                 </div>
-                            </div>
+                            </div>*@
                         }
                     </div>
                     <div class="white-space-50"></div>

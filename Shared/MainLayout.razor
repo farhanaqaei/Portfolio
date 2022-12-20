@@ -1,10 +1,10 @@
-﻿@using Microsoft.AspNetCore.Mvc;
-@using Portfolio2.Models;
-@using Portfolio2.Services;
-@inherits LayoutComponentBase;
+﻿@inherits LayoutComponentBase;
+@using Blazored.Toast.Configuration;
+@using Microsoft.AspNetCore.Mvc;
 @inject NavigationManager NavigationManager;
 @inject EndpointDataSource EndpointsDataSource
-@inject PortfolioService PortfolioService;
+@inject IPortfolioService PortfolioService;
+@inject IToastService ToastService;
 @inject IWebHostEnvironment Env;
 @inject IJSRuntime JS;
 
@@ -20,6 +20,11 @@
     </div>
 </div>
 <!-- /Loading animation -->
+
+<BlazoredToasts Position="ToastPosition.BottomRight"
+                Timeout="5" 
+                ShowCloseButton=false
+                ShowProgressBar=true />
 
 <div class="page">
     <div class="page-content">
@@ -47,7 +52,7 @@
             </div>
 
             <div class="header-buttons">
-                <a onclick="@DownloadCV" target="_blank" class="btn btn-primary">Download CV</a>
+                <a onclick="@FakeDownloadCV" target="_blank" class="btn btn-primary">Download CV</a>
             </div>
 
             <div class="copyrights">© @DateTime.Now.Year All rights reserved.</div>

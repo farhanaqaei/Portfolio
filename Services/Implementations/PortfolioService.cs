@@ -2,10 +2,11 @@
 using MongoDB.Driver;
 using Portfolio2.Dtos;
 using Portfolio2.Models;
+using Portfolio2.Services.Interfaces;
 
-namespace Portfolio2.Services;
+namespace Portfolio2.Services.Implementations;
 
-public class PortfolioService
+public class PortfolioService : IPortfolioService
 {
     private readonly IMongoCollection<Person> _personsCollection;
     private readonly IMongoCollection<Resume> _resumesCollection;
@@ -15,10 +16,10 @@ public class PortfolioService
     public PortfolioService(
         IOptions<PortfolioDBSettings> portfolioDatabaseSettings)
     {
-        // for development
+        // for local db
         //var mongoClient = new MongoClient(portfolioDatabaseSettings.Value.ConnectionString);
 
-        // for deployment
+        // for remote db
         var mongoClient = new MongoClient(envConnectionString);
 
         var mongoDatabase = mongoClient.GetDatabase(
@@ -42,7 +43,7 @@ public class PortfolioService
         var person = GetPersonalData();
         var resume = _resumesCollection.Find(x => x.Id == person.ResumeId).FirstOrDefault();
         resumeDto.Resume = resume;
-        resumeDto.Person= person;
+        resumeDto.Person = person;
         return resumeDto;
     }
 
@@ -52,7 +53,7 @@ public class PortfolioService
                           join portfolio in _portfoliosCollection.AsQueryable()
                           on person.Id equals portfolio.PersonId
                           select portfolio).ToList();
-                          
+
         return portfolios;
     }
 }
