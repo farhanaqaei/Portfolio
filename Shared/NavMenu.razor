@@ -2,31 +2,31 @@
 
 <ul class="main-menu">
     <li>
-        <a class="nav-link" @onclick='() => NavigateToPage("/")'>
+        <a class="nav-link @(ActivePage == "" ? "active" : "")" @onclick='() => NavigateToPage("")'>
             <span class="menu-icon lnr lnr-home"></span>
             <span class="link-text">Home</span>
         </a>
     </li>
     <li>
-        <a class="nav-link" @onclick='() => NavigateToPage("aboutme")'>
+        <a class="nav-link @(ActivePage == "aboutme" ? "active" : "")" @onclick='() => NavigateToPage("aboutme")'>
             <span class="menu-icon lnr lnr-user"></span>
             <span class="link-text">About Me</span>
         </a>
     </li>
     <li>
-        <a class="nav-link" @onclick='() => NavigateToPage("resume")'>
+        <a class="nav-link @(ActivePage == "resume" ? "active" : "")" @onclick='() => NavigateToPage("resume")'>
             <span class="menu-icon lnr lnr-graduation-hat"></span>
             <span class="link-text">Resume</span>
         </a>
     </li>
     <li>
-        <a class="nav-link" @onclick='() => NavigateToPage("portfolio")'>
+        <a class="nav-link @(ActivePage == "portfolio" ? "active" : "")" @onclick='() => NavigateToPage("portfolio")'>
             <span class="menu-icon lnr lnr-briefcase"></span>
             <span class="link-text">Portfolio</span>
         </a>
     </li>
     <li>
-        <a class="nav-link" @onclick='() => NavigateToPage("contact")'>
+        <a class="nav-link @(ActivePage == "contact" ? "active" : "")" @onclick='() => NavigateToPage("contact")'>
             <span class="menu-icon lnr lnr-envelope"></span>
             <span class="link-text">Contact</span>
         </a>
@@ -34,6 +34,8 @@
 </ul>
 
 @code {
+    private string ActivePage => NavigationManager.Uri.ToString().Replace(NavigationManager.BaseUri.ToString(), "");
+    
     [Parameter]
     public EventCallback onNavLinkClicked { get; set; }
 

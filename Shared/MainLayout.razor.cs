@@ -11,8 +11,6 @@ public partial class MainLayout
     private string siteHeaderClass = "mobile-menu-hide";
     private Person? person;
     private List<string> routables = new List<string> { "", "aboutme", "resume", "portfolio", "contact" };
-    private string next = "n";
-    private string previous = "p";
 
 
     protected override void OnInitialized()
@@ -40,7 +38,7 @@ public partial class MainLayout
                 NavigationManager.NavigateTo(routables[currentPageIndex + 1].ToLower(), false);
             else
                 NavigationManager.NavigateTo("/", false);
-        }
+            }
         else
         {
             if (currentPageIndex - 1 >= 0)
