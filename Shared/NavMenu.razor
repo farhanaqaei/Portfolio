@@ -1,36 +1,45 @@
-﻿<ul class="main-menu">
+﻿@inject NavigationManager NavigationManager;
+
+<ul class="main-menu">
     <li>
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="menu-icon lnr lnr-home"></span>
-                <span class="link-text">Home</span>
-            </NavLink>
+        <a class="nav-link" @onclick='() => NavigateToPage("/")'>
+            <span class="menu-icon lnr lnr-home"></span>
+            <span class="link-text">Home</span>
+        </a>
     </li>
     <li>
-            <NavLink class="nav-link" href="aboutme">
-                <span class="menu-icon lnr lnr-user"></span>
-                <span class="link-text">About Me</span>
-            </NavLink>
+        <a class="nav-link" @onclick='() => NavigateToPage("aboutme")'>
+            <span class="menu-icon lnr lnr-user"></span>
+            <span class="link-text">About Me</span>
+        </a>
     </li>
     <li>
-            <NavLink class="nav-link" href="resume">
-                <span class="menu-icon lnr lnr-graduation-hat"></span>
-                <span class="link-text">Resume</span>
-            </NavLink>
+        <a class="nav-link" @onclick='() => NavigateToPage("resume")'>
+            <span class="menu-icon lnr lnr-graduation-hat"></span>
+            <span class="link-text">Resume</span>
+        </a>
     </li>
     <li>
-            <NavLink class="nav-link" href="portfolio">
-                <span class="menu-icon lnr lnr-briefcase"></span>
-                <span class="link-text">Portfolio</span>
-            </NavLink>
+        <a class="nav-link" @onclick='() => NavigateToPage("portfolio")'>
+            <span class="menu-icon lnr lnr-briefcase"></span>
+            <span class="link-text">Portfolio</span>
+        </a>
     </li>
     <li>
-            <NavLink class="nav-link" href="contact">
-                <span class="menu-icon lnr lnr-envelope"></span>
-                <span class="link-text">Contact</span>
-            </NavLink>
+        <a class="nav-link" @onclick='() => NavigateToPage("contact")'>
+            <span class="menu-icon lnr lnr-envelope"></span>
+            <span class="link-text">Contact</span>
+        </a>
     </li>
 </ul>
 
 @code {
+    [Parameter]
+    public EventCallback onNavLinkClicked { get; set; }
 
+    protected async Task NavigateToPage(string page)
+    {
+        NavigationManager.NavigateTo(page, false);
+        await onNavLinkClicked.InvokeAsync();
+    }
 }
