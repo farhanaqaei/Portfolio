@@ -77,16 +77,15 @@ public partial class MainLayout
 
     private async Task DownloadCV()
     {
-        var fileName = "fa.pdf";
+        // to download cv
+        //var fileName = "fa.pdf";
+        //var filePath = Path.Combine(Env.WebRootPath, "assets", fileName);
+        //byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+        //var fileStream = new MemoryStream(fileBytes);
+        //using var streamRef = new DotNetStreamReference(stream: fileStream);
+        //await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
 
-        var filePath = Path.Combine(Env.WebRootPath, "assets", fileName);
-
-        byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
-
-        var fileStream = new MemoryStream(fileBytes);
-
-        using var streamRef = new DotNetStreamReference(stream: fileStream);
-
-        await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+        CloseNavMenuOnClickOutside();
+        ToastService.ShowToast<ToastMessage>(_toastParameters);
     }
 }
