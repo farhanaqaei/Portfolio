@@ -119,20 +119,28 @@
 
 @code {
     private Person? person;
-    private MailDTO? mail = new MailDTO();
+    private MailDTO? mail = new MailDTO(); 
+    private ToastParameters _toastParameters;
 
     protected override void OnInitialized() => person = PortfolioService.GetPersonalData();
 
     protected async Task SendEmail()
     {
         var result = await EmailService.SendContactEmail(mail);
-
+        _toastParameters = new ToastParameters();
         if (result == true)
         {
             mail = new MailDTO();
-            ToastService.ShowSuccess("Your email has sent successfully, We'll be in touch ASAP!");
+
+            _toastParameters.Add(nameof(ToastMessage.Heading), "success");
+            _toastParameters.Add(nameof(ToastMessage.Message), "Your email has sent successfully, We'll be in touch ASAP!");
+            ToastService.ShowToast<ToastMessage>(_toastParameters);
         }
         else
-            ToastService.ShowWarning("Something went wrong! Please try again.");
+        {
+            _toastParameters.Add(nameof(ToastMessage.Heading), "error");
+            _toastParameters.Add(nameof(ToastMessage.Message), "Something went wrong! Please try again.");
+            ToastService.ShowToast<ToastMessage>(_toastParameters);
+        }
     }
 }

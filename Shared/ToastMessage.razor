@@ -1,0 +1,48 @@
+﻿<h5>@Heading.ToUpper()</h5>
+<p>@Message</p>
+
+@code {
+    [Parameter]
+    public string Heading { get; set; } = "";
+    [Parameter]
+    public string Message { get; set; } = "";
+
+    private string bgColor = "red";
+
+    protected override void OnInitialized()
+    {
+        switch (Heading)
+        {
+            case "info":
+                bgColor = "#0059b3";
+                break;
+            case "success":
+                bgColor = "#009973";
+                break;
+            case "error":
+                bgColor = "#b30000";
+                break;
+            case "warning":
+                bgColor = "#cc5200";
+                break;
+        }
+    }
+}
+
+<style>
+    .blazored-toast-container {
+        background-color: @bgColor;
+        border-radius: 10px;
+        opacity: 90%;
+    }
+
+    .blazored-toast {
+        margin-bottom: 0;
+        padding: .5rem 1.1rem;
+        width: 25rem;
+    }
+    
+    .blazored-toast h5 {
+        margin: 0;
+    }
+</style>

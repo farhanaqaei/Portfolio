@@ -53,7 +53,6 @@ public class EmailService : IEmailService
         catch (Exception)
         {
             return false;
-            throw;
         }
     }
 }

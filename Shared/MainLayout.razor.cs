@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Toast;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Portfolio2.Models;
 
@@ -12,6 +13,7 @@ public partial class MainLayout
     private Person? person;
     private List<string> routables = new List<string> { "", "aboutme", "resume", "portfolio", "contact" };
 
+    private ToastParameters _toastParameters;
 
     protected override void OnInitialized()
     {
@@ -25,6 +27,10 @@ public partial class MainLayout
         //       ().Count() > 0).Select(x => x.Name.ToLower()).ToList();
 
         person = PortfolioService.GetPersonalData();
+
+        _toastParameters = new ToastParameters();
+        _toastParameters.Add(nameof(ToastMessage.Heading), "info");
+        _toastParameters.Add(nameof(ToastMessage.Message), "Sorry, No CV found!");
     }
 
     protected void ChangePageOnArrowNavs(string direction)
@@ -67,11 +73,6 @@ public partial class MainLayout
         collapseNavMenu = true;
         menuClass = "";
         siteHeaderClass = "mobile-menu-hide";
-    }
-
-    private void FakeDownloadCV()
-    {
-        ToastService.ShowInfo("Sorry, No CV found!");
     }
 
     private async Task DownloadCV()
