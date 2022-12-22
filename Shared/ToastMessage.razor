@@ -1,9 +1,8 @@
-﻿<h5>@Heading.ToUpper()</h5>
-<p>@Message</p>
+﻿<p>@Message</p>
 
 @code {
     [Parameter]
-    public string Heading { get; set; } = "";
+    public string Status { get; set; } = "";
     [Parameter]
     public string Message { get; set; } = "";
 
@@ -11,7 +10,7 @@
 
     protected override void OnInitialized()
     {
-        switch (Heading)
+        switch (Status)
         {
             case "info":
                 bgColor = "#0059b3";

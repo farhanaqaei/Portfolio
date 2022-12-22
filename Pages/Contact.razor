@@ -132,13 +132,13 @@
         {
             mail = new MailDTO();
 
-            _toastParameters.Add(nameof(ToastMessage.Heading), "success");
+            _toastParameters.Add(nameof(ToastMessage.Status), "success");
             _toastParameters.Add(nameof(ToastMessage.Message), "Your email has sent successfully, We'll be in touch ASAP!");
             ToastService.ShowToast<ToastMessage>(_toastParameters);
         }
         else
         {
-            _toastParameters.Add(nameof(ToastMessage.Heading), "error");
+            _toastParameters.Add(nameof(ToastMessage.Status), "error");
             _toastParameters.Add(nameof(ToastMessage.Message), "Something went wrong! Please try again.");
             ToastService.ShowToast<ToastMessage>(_toastParameters);
         }

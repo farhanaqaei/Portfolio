@@ -29,7 +29,7 @@ public partial class MainLayout
         person = PortfolioService.GetPersonalData();
 
         _toastParameters = new ToastParameters();
-        _toastParameters.Add(nameof(ToastMessage.Heading), "info");
+        _toastParameters.Add(nameof(ToastMessage.Status), "info");
         _toastParameters.Add(nameof(ToastMessage.Message), "Sorry, No CV found!");
     }
 
