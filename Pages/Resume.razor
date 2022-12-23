@@ -10,14 +10,14 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-7">
-                @foreach (var eduOrExp in resume.Resume.EducationOrExperiences.GroupBy(x => x.Type).Select(x => x.Key))
+                @foreach (var eduOrWrk in resume.Resume.EducationOrWorkExperiences.GroupBy(x => x.Type).Select(x => x.Key))
                 {
                     <div class="block-title">
-                        <h3>@eduOrExp</h3>
+                        <h3>@eduOrWrk</h3>
                     </div>
 
                     <div class="timeline timeline-second-style clearfix">
-                        @foreach (var item in resume.Resume.EducationOrExperiences.Where(x => x.Type == eduOrExp))
+                        @foreach (var item in resume.Resume.EducationOrWorkExperiences.Where(x => x.Type == eduOrWrk).OrderByDescending(x => x.StartDate))
                         {
                                 <div class="timeline-item clearfix">
                                     @if (!item.IsStillGoingOn)
@@ -77,15 +77,15 @@
 
                     <div class="skills-info skills-second-style">
                         <!-- Skill 1 -->
-                        @foreach (var skill in resume.Resume.Skills.Where(x => x.Type == type))
+                        @foreach (var skill in resume.Resume.Skills.Where(x => x.Type == type).OrderBy(x => x.Priority))
                         {
                             <div>
                                 <div class="skill clearfix">
                                     <h4>@skill.Title</h4>
-                                    <div class="skill-value">@skill.MasteryPercentage%</div>
+                                    <div class="skill-value">@skill.LevelOfEcpertise%</div>
                                 </div>
                                 <div class="skill-container skill-1">
-                                    <div class="skill-percentage" style="width: @skill.MasteryPercentage%"></div>
+                                    <div class="skill-percentage" style="width: @skill.LevelOfEcpertise%"></div>
                                 </div>
                             </div>
                         }
@@ -97,13 +97,13 @@
 
                 <!-- Knowledges -->
                 <div class="block-title">
-                    <h3>Knowledges</h3>
+                    <h3>Soft <span>Skills</span></h3>
                 </div>
 
                 <ul class="knowledges">
-                    @foreach (var knowledge in resume.Resume.Knoledge)
+                    @foreach (var skill in resume.Resume.SoftSkills)
                     {
-                        <li>@knowledge</li>
+                        <li>@skill</li>
                     }
                 </ul>
                 <!-- End of Knowledges -->

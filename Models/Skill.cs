@@ -4,5 +4,6 @@ public class Skill
 {
     public string Type { get; set; }
     public string Title { get; set; }
-    public int MasteryPercentage { get; set; }
+    public int LevelOfEcpertise { get; set; }
+    public int Priority { get; set; }
 }

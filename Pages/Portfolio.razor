@@ -25,19 +25,33 @@
                     <!-- Portfolio Grid -->
                     <div class="portfolio-grid three-columns shuffle row">
 
-                        @foreach (var portfolio in filteredPortfolios)
+                        @foreach (var portfolio in filteredPortfolios.Where(x => x.ImagePath != null && x.ImagePath != ""))
                         {
                             <figure class="item shuffle-item filtered col-md-4">
                                 <div class="portfolio-item-img">
                                     <img src="@portfolio.ImagePath" alt="@portfolio.Title" title="">
-                                    <a href="@portfolio.GitUrl" class="lightbox mfp-iframe" target="_blank" title="@portfolio.Title"></a>
+                                    <a href="@portfolio.GitUrl" class="lightbox mfp-iframe" target="_blank" title="@(portfolio.Description ?? portfolio.Title)"></a>
                                 </div>
                                 <h4 class="name">@portfolio.Title</h4>
                                 <span class="category">@portfolio.ProjectType</span>
                             </figure>
                         }
+                    </div>@if (filteredPortfolios.Any(x => x.ImagePath == null || x.ImagePath == ""))
+                    {
+                        <div class="white-space-20"></div>
+                        <div class="page-title">
+                            <h3>Other <span>Projects</span></h3>
+                        </div>
+                        <div class="row">
+                            @foreach (var portfolio in filteredPortfolios.Where(x => x.ImagePath == null || x.ImagePath == ""))
+                            {
+                                <figure class="col-md-6">
+                                    <a href="@portfolio.GitUrl" class="lightbox mfp-iframe" target="_blank" title="@(portfolio.Description ?? portfolio.Title)"><h4 style="color: #76b900;" class="name">@portfolio.Title</h4></a>
+                                </figure>
+                            }
 
-                    </div>
+                        </div>
+                    }
                 </div>
                 <!-- End of Portfolio Content -->
             </div>

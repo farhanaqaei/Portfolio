@@ -1,6 +1,6 @@
 ﻿namespace Portfolio2.Models;
 
-public class EducationOrExperience
+public class EducationOrWorkExperience
 {
     public string Type { get; set; }
     public string Title { get; set; }
