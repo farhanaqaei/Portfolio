@@ -10,9 +10,9 @@ builder.Services.Configure<PortfolioDBSettings>(
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddTransient<IPortfolioService, PortfolioService>();
-builder.Services.AddTransient<IViewRendererService, ViewRendererService>();
-builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddScoped<IPortfolioService, PortfolioService>();
+builder.Services.AddScoped<IViewRendererService, ViewRendererService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddBlazoredToast();
 
 var app = builder.Build();
