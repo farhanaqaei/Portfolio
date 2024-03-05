@@ -19,32 +19,28 @@
                     <div class="timeline timeline-second-style clearfix">
                         @foreach (var item in resume.Resume.EducationOrWorkExperiences.Where(x => x.Type == eduOrWrk).OrderByDescending(x => x.StartDate))
                         {
-                                <div class="timeline-item clearfix">
-                                    @if (!item.IsStillGoingOn)
-                                    {
-                                        <div class="left-part">
-                                            <h5 class="item-period">@item.StartDate.ToString("yyyy") - @item.EndDate.ToString("yyyy")</h5>
-                                            <span class="item-company">@item.Institution</span>
-                                        </div>
-                                        <div class="divider"></div>
-                                        <div class="right-part">
-                                            <h4 class="item-title">@item.Title</h4>
-                                            <p>@item.Description</p>
-                                        </div>
+                            <div class="timeline-item clearfix">
+                                <div class="left-part">
+                                    @{
+                                        var period = item.IsStillGoingOn ? $"{item.StartDate:yyyy} - Present" : $"{item.StartDate:yyyy} - {item.EndDate:yyyy}";
                                     }
-                                    else
+                                    <h5 class="item-period">@period</h5>
+                                    <span class="item-company">@item.Institution</span>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="right-part">
+                                    <h4 class="item-title">@item.Title</h4>
+                                    @if (item.Description != null)
                                     {
-                                        <div class="left-part">
-                                            <h5 class="item-period">@item.StartDate.ToString("yyyy") - Present</h5>
-                                            <span class="item-company">@item.Institution</span>
-                                        </div>
-                                    <div class="divider"></div>
-                                        <div class="right-part">
-                                            <h4 class="item-title">@item.Title</h4>
-                                            <p>@item.Description</p>
-                                        </div>
+                                        var descriptionParts = item.Description.Split("Website: ");
+                                        <p>@descriptionParts[0]</p>
+                                        @if (descriptionParts.Length > 1)
+                                        {
+                                            <a target="_blank" style="color: #76b900;" href="@descriptionParts[1].Trim()">@descriptionParts[1]</a>
+                                        }
                                     }
                                 </div>
+                            </div>
                             @*<div class="timeline-item clearfix">
                                 <div class="left-part">
                                     <h5 class="item-period">@item.StartDate.ToString("yyyy")</h5>
@@ -77,7 +73,7 @@
 
                     <div class="skills-info skills-second-style">
                         <!-- Skill 1 -->
-                        @foreach (var skill in resume.Resume.Skills.Where(x => x.Type == type).OrderBy(x => x.Priority))
+                        @* @foreach (var skill in resume.Resume.Skills.Where(x => x.Type == type).OrderBy(x => x.Priority))
                         {
                             <div>
                                 <div class="skill clearfix">
@@ -88,7 +84,13 @@
                                     <div class="skill-percentage" style="width: @skill.LevelOfEcpertise%"></div>
                                 </div>
                             </div>
-                        }
+                        } *@
+                        <ul class="knowledges">
+                            @foreach (var skill in resume.Resume.Skills.Where(x => x.Type == type).OrderBy(x => x.Priority))
+                            {
+                                <li>@skill.Title</li>
+                            }
+                        </ul>
                         <!-- End of Skill 1 -->
                     </div>
                     <!-- End of Design Skills -->

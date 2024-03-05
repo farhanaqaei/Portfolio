@@ -28,7 +28,7 @@
                         @foreach (var portfolio in filteredPortfolios.Where(x => x.ImagePath != null && x.ImagePath != ""))
                         {
                             <figure class="item shuffle-item filtered col-md-4">
-                                <div class="portfolio-item-img">
+                                <div class="portfolio-item-img" style="border-radius: 10px">
                                     <img src="@portfolio.ImagePath" alt="@portfolio.Title" title="">
                                     <a href="@portfolio.GitUrl" class="lightbox mfp-iframe" target="_blank" title="@(portfolio.Description ?? portfolio.Title)"></a>
                                 </div>
