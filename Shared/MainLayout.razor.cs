@@ -11,7 +11,7 @@ public partial class MainLayout
     private string menuClass = "";
     private string siteHeaderClass = "mobile-menu-hide";
     private Person? person;
-    private List<string> routables = new List<string> { "", "aboutme", "resume", "portfolio", "contact" };
+    private List<string> routables = new List<string> { "aboutme", "resume", "portfolio", "contact" };
 
     private ToastParameters _toastParameters;
 

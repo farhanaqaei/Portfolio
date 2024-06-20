@@ -27,7 +27,7 @@
 
                         @foreach (var portfolio in filteredPortfolios.Where(x => x.ImagePath != null && x.ImagePath != ""))
                         {
-                            <figure class="item shuffle-item filtered col-md-4">
+                            <figure class="item shuffle-item filtered col-md-2">
                                 <div class="portfolio-item-img" style="border-radius: 10px">
                                     <img src="@portfolio.ImagePath" alt="@portfolio.Title" title="">
                                     <a href="@portfolio.GitUrl" class="lightbox mfp-iframe" target="_blank" title="@(portfolio.Description ?? portfolio.Title)"></a>
@@ -46,7 +46,7 @@
                             @foreach (var portfolio in filteredPortfolios.Where(x => x.ImagePath == null || x.ImagePath == ""))
                             {
                                 <figure class="col-md-6">
-                                    <a href="@portfolio.GitUrl" class="lightbox mfp-iframe" target="_blank" title="@(portfolio.Description ?? portfolio.Title)"><h4 style="color: #76b900;" class="name">@portfolio.Title</h4></a>
+                                    <a href="@portfolio.GitUrl" class="lightbox mfp-iframe" target="_blank" title="@(portfolio.Description ?? portfolio.Title)"><h4 style="color: #ff4953;" class="name">@portfolio.Title</h4></a>
                                 </figure>
                             }
 
